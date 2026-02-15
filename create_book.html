@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <title>Создать словарь</title>
+    <link rel="stylesheet" href="create_book.css">
+</head>
+<body>
+    <header class="header">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu" id="menu">
+            <button class="menu-item" id="installBtn">📥 Установить приложение</button>
+        </div>
+        <h1 class="header-title">Создать словарь</h1>
+        <a href="init.html" class="back-button">←</a>
+    </header>
+
+    <!-- Modal для ввода названия словаря -->
+    <div class="modal active" id="nameModal">
+        <div class="modal-content">
+            <h2>Введите название словаря</h2>
+            <input type="text" id="bookName" class="input-field">
+            <div class="modal-buttons">
+                <button class="btn-ok" id="btnConfirmName">OK</button>
+                <button class="btn-cancel-modal" id="btnCancelModal">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент добавления слов -->
+    <div class="main-container" id="mainContent" style="display: none;">
+        <div class="content">
+            <div class="book-title" id="displayBookName"></div>
+            
+            <div class="words-container" id="wordsContainer">
+                <div class="word-pair">
+                    <div class="word-field">
+                        <label>Лицевая сторона</label>
+                        <input type="text" class="word-input front-side">
+                    </div>
+                    <div class="word-field">
+                        <label>Обратная сторона</label>
+                        <input type="text" class="word-input back-side">
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-add-more" id="btnAddMore">+ Добавить еще слова</button>
+            
+            <div class="action-buttons">
+                <button class="btn-save" id="btnSave">Сохранить словарь</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="create_book.js"></script>
+</body>
+</html>

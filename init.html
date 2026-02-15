@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Приложение для создания и изучения словарей">
+    <meta name="theme-color" content="#667eea">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Anki">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23667eea' width='192' height='192'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='80' font-weight='bold' fill='white' font-family='Arial'>A</text></svg>">
+    <link rel="manifest" href="manifest.json">
+    <title>Anki - Главная</title>
+    <link rel="stylesheet" href="init.css">
+</head>
+<body>
+    <header class="header">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu" id="menu">
+            <button class="menu-item" id="installBtn">📥 Установить приложение</button>
+        </div>
+        <h1 class="header-title">Anki</h1>
+    </header>
+
+    <div class="main-container">
+        <div class="content">
+            <button class="btn-create" id="btnCreate">
+                <span class="plus-icon">+</span>
+                Создать словарь
+            </button>
+
+            <div class="cards-list">
+                <h2 class="list-title">Мои словари</h2>
+                <div class="cards-grid" id="cardsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="init.js"></script>
+    <script>
+        // Регистрация Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(registration => console.log('Сервис воркер зарегистрирован'))
+                .catch(err => console.log('Ошибка регистрации Service Worker:', err));
+        }
+    </script>
+</body>
+</html>
