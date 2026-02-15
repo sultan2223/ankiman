@@ -1,14 +1,15 @@
 const CACHE_NAME = 'anki-v1';
 const urlsToCache = [
-  '/anki_test/init.html',
-  '/anki_test/init.css',
-  '/anki_test/init.js',
-  '/anki_test/create_book.html',
-  '/anki_test/create_book.css',
-  '/anki_test/create_book.js',
-  '/anki_test/main.html',
-  '/anki_test/main.css',
-  '/anki_test/main.js'
+  './index.html',
+  './init.html',
+  './init.css',
+  './init.js',
+  './create_book.html',
+  './create_book.css',
+  './create_book.js',
+  './main.html',
+  './main.css',
+  './main.js'
 ];
 
 // Установка Service Worker
