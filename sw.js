@@ -1,4 +1,4 @@
-const CACHE_NAME = 'anki-v1';
+const CACHE_NAME = 'anki-v2';
 const urlsToCache = [
   './index.html',
   './init.html',
@@ -14,6 +14,7 @@ const urlsToCache = [
 
 // Установка Service Worker
 self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -36,41 +37,38 @@ self.addEventListener('activate', event => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
 // Перехват запросов
 self.addEventListener('fetch', event => {
+  // Навигационные запросы (пользователь открывает экран) — отдаём init.html как fallback
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match('./init.html'))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        // Вернуть из кэша, если есть
-        if (response) {
-          return response;
-        }
-        
-        // Иначе взять из сети
+        if (response) return response;
+
         return fetch(event.request)
           .then(response => {
-            // Не кэшировать при ошибке
             if (!response || response.status !== 200 || response.type === 'error') {
               return response;
             }
-            
-            // Клонировать ответ
+
             const responseToCache = response.clone();
             caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-            
+              .then(cache => cache.put(event.request, responseToCache));
+
             return response;
           })
-          .catch(() => {
-            // Использовать кэш при отсутствии интернета
-            return caches.match(event.request);
-          });
+          .catch(() => caches.match(event.request));
       })
   );
 });
